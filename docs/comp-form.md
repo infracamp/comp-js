@@ -3,6 +3,7 @@
 ```html
 <comp-form 
     ajax-action="ajax.json"
+    preload
     >
     
     <input type="text" name="test1">

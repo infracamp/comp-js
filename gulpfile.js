@@ -3,6 +3,7 @@ const { src, dest, parallel, task } = require('gulp');
 const gulp = require("gulp");
 const { watch } = require("gulp-watch");
 const concat = require('gulp-concat');
+const minify = require("gulp-minify");
 
 /*
 function html() {
@@ -24,7 +25,7 @@ function js() {
     return src('src/*.js', { sourcemaps: true })
         .pipe(concat('compjs.js'))
         .pipe(dest('www/dist', { sourcemaps: true }))
-        .pipe(dest('dist', { sourcemaps: true }))
+        .pipe(dest('dist', { sourcemaps: true }));
 }
 
 exports.js = js;
