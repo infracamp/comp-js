@@ -3,6 +3,7 @@
 ```html
 <comp-form 
     ajax-action="ajax.json"
+    onsuccess="alert('yea')"
     preload
     >
     

@@ -78,11 +78,13 @@ class CompForm extends HTMLElement {
         var self = this;
         jQuery.ajax(ajaxOptions).done(
             function (data) {
-                self._submitButton.prop("disabled", false);
+                //self._submitButton.prop("disabled", false);
                 self._submitButton.removeClass("loading");
-                self._formElements.prop("disabled", false);
+                self._submitButton.addClass("saved");
+                //self._formElements.prop("disabled", false);
                 if (self.onsuccess !== null)
                     eval(self.onsuccess);
+
             }
         );
 
