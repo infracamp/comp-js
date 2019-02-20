@@ -22,10 +22,7 @@ class CompPane extends HTMLElement {
                 this.ajaxSrc = newValue;
                 break;
         }
-
-
     }
-
 
     connectedCallback() {
         var renderer = new Renderer();

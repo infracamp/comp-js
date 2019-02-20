@@ -34,5 +34,5 @@ exports.css = css;
 exports.default = parallel(js, css);
 
 task("watch", function () {
-    gulp.watch("src/*.*", exports.default)
+    gulp.watch("src/*.js", exports.default)
 })

@@ -11,6 +11,7 @@ class CompForm extends HTMLElement {
     }
 
 
+
     static get observedAttributes() { return ["ajax-action", "preload", "onsuccess"]; }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -25,6 +26,7 @@ class CompForm extends HTMLElement {
                 this.onsuccess = newValue;
                 break;
         }
+
 
         console.log("attribute change");
     }
