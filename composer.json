@@ -1,0 +1,26 @@
+{
+  "name": "infracamp/comp-js",
+  "description": "comp-js Framework",
+  "keywords": ["Keyword1", "Keyword2"],
+  "license": "Proprietary",
+  "authors": [
+    { "name": "Matthias Leuffen", "email": "m@tth.es" }
+  ],
+  "repositories": [
+  ],
+  "require": {
+    "php": ">=7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "InfraCamp\\CompJs\\": "src/"
+    },
+    "files": [
+      "config.php"
+    ]
+  },
+  "minimum-stability": "dev",
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  }
+}

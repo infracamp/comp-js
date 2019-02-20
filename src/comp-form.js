@@ -82,8 +82,11 @@ class CompForm extends HTMLElement {
                 self._submitButton.removeClass("loading");
                 self._submitButton.addClass("saved");
                 //self._formElements.prop("disabled", false);
-                if (self.onsuccess !== null)
-                    eval(self.onsuccess);
+                if (self.onsuccess !== null) {
+                    let r = eval(self.onsuccess);
+                    if (typeof r === "function")
+                        r(this, data);
+                }
 
             }
         );
@@ -107,8 +110,6 @@ class CompForm extends HTMLElement {
     }
 
 }
-
-
 
 
 customElements.define("comp-form", CompForm);

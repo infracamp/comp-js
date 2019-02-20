@@ -9,7 +9,8 @@ class CompPane extends HTMLElement {
 
 
     reload() {
-
+        var renderer = new Renderer();
+        renderer.renderInto(this, {}, $(this).find("template")[0]);
     }
 
 
@@ -21,10 +22,19 @@ class CompPane extends HTMLElement {
                 this.ajaxSrc = newValue;
                 break;
         }
+
+
     }
+
+
+    connectedCallback() {
+        var renderer = new Renderer();
+        renderer.renderInto(this, {blah: "muh"}, $(this).find("template")[0]);
+    }
+
 
 }
 
 
 
-
+customElements.define("comp-pane", CompPane);

@@ -8,4 +8,4 @@ command:
   dev:
     - "sudo npm install gulp-cli -g"
     - "npm install -D"
-    - "gulp watch"
+    - "D:gulp watch"
