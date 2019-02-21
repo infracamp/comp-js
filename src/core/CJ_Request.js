@@ -47,7 +47,6 @@ class CJ_Req {
      */
     _make_request(fn, filter) {
         this.request.success = function (data) {
-            console.log(data);
             if (filter === "json")
                 data = JSON.parse(data);
             fn(data);

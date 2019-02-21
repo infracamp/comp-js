@@ -7,7 +7,7 @@ A streamline, less code http-request object.
 Make a simple http request:
 
 ```js
-c.req("http://google.de").plain = (data) => console.log(data);
+c.req("http://google.de").plain = [function];
 ```
 
 ## Examples
@@ -16,7 +16,7 @@ c.req("http://google.de").plain = (data) => console.log(data);
 
 <cj-highlight>
 <div id="id1">Hello</div>
-<button onclick="c.req('/data/form.json').plain = (data) => {console.log(data); ce.any('id1').innerText = data;}">Load Ajax</button>
+<button onclick="c.req('/data/form.json').plain = (data) => { ce.any('id1').innerText = data; }">Load Ajax</button>
 </cj-highlight>
 
 
@@ -24,8 +24,7 @@ c.req("http://google.de").plain = (data) => console.log(data);
 
 <cj-highlight>
 <div id="json1"></div>
-<cj-script language="Javascript">
-console.log("eval ready");
+<cj-script>
 c.req('/data/form.json').json = (jsonData) => ce.any('json1').innerText = jsonData["text1"]; 
 </cj-script>
 </cj-highlight>

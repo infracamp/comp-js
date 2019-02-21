@@ -20,7 +20,7 @@ $app->theme->cssUrls[] = "/dist/compjs.css";
 
 // Define the Routes:
 $app->addPage("/", function () use ($hl) {
-    return ["h1" => "phore/status-page", pt()->view_code($hl->getCode())];
+    return FHtml::MarkdownFile(__DIR__ . "/inc/home.md");
 }, new NaviButtonWithIcon("Home", "fas fa-home"));
 
 // Define the Tables site
@@ -29,14 +29,14 @@ $app->addPage("/req", function () {
 }, new NaviButtonWithIcon("HTTP Requests", "fas fa-table"));
 
 // Define the Cards site
-$app->addPage("/basic_table", function () {
-    return require __DIR__ . "/inc/basic_tables.php";
-}, new NaviButtonWithIcon("Basic Table", "fas fa-table"));
+$app->addPage("/forms", function () {
+    return FHtml::MarkdownFile(__DIR__ . "/inc/forms.md");
+}, new NaviButtonWithIcon("Forms", "fas fa-table"));
 
 // Define the Cards site
-$app->addPage("/cards", function () {
-    return require __DIR__ . "/inc/cards.php";
-}, new NaviButtonWithIcon("Cards", "fas fa-table"));
+$app->addPage("/pane", function () {
+    return FHtml::MarkdownFile(__DIR__ . "/inc/pane.md");
+}, new NaviButtonWithIcon("Pane", "fas fa-table"));
 
 $app->addPage("/vue-elements", function () {
     return require __DIR__ . "/inc/vue-elements.php";

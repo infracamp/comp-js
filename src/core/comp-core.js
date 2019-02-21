@@ -21,10 +21,6 @@ class CompCore {
     }
 
 
-    ajax(url) {
-
-    }
-
     evalAttr(attrValue, event, ownerObj) {
         console.log("eval", attrValue);
         if (attrValue === null)

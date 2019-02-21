@@ -9,6 +9,14 @@ class CJFormElement extends CJHtmlElement {
     }
 
 
+    get data() {
+        return this.getData();
+    }
+
+    set data(value) {
+        this.setData(value);
+    }
+
 
     static get observedAttributes() { return ["onsubmit"]; }
 
@@ -31,7 +39,11 @@ class CJFormElement extends CJHtmlElement {
      * @return object
      */
     getData() {
-        return this._gather_form_data()
+        var ret = {};
+        var elements = $("input, textarea, checkbox", this);
+        elements.each((i, e) => this._gather_form_data(e, ret));
+
+        return ret;
     }
 
     /**
@@ -88,7 +100,8 @@ class CJFormElement extends CJHtmlElement {
      * @private
      */
     _fill_data (dataObj) {
-        this._formElements.each((i, e) => this._fill_form_single(e, dataObj));
+        var elements = $("input, textarea, checkbox", this);
+        elements.each((i, e) => this._fill_form_single(e, dataObj));
     }
 
 
