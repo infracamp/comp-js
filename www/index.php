@@ -38,9 +38,6 @@ $app->addPage("/pane", function () {
     return FHtml::MarkdownFile(__DIR__ . "/inc/pane.md");
 }, new NaviButtonWithIcon("Pane", "fas fa-table"));
 
-$app->addPage("/vue-elements", function () {
-    return require __DIR__ . "/inc/vue-elements.php";
-}, new NaviButtonWithIcon("Vue Elements", "fas fa-table"));
 
 
 $app->addPage("/subapp", function() {}, new NaviButtonWithIcon("Sub Application", "fas fa-time"));

@@ -25,7 +25,7 @@ class CjHighlightElement extends CJHtmlElement {
                     code.classList.add("html");
                     code.style.whiteSpace = "pre";
                     code.innerText = content;
-
+                    document.dispatchEvent(new Event("load"));
                 }, 1);
     }
 

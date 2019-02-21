@@ -8,6 +8,7 @@ Whats inside?
 - Standalone js library (no Webpack, Babel, etc) required
 - Optimized for IDE Auto-Completion
 - WebComponents
+- Size: < 15kB 
 
 Why another framework? 
 
