@@ -6,19 +6,29 @@
     <meta charset="utf-8"/>
 </head>
 <body>
+
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="/dist/compjs.js" language="JavaScript"></script>
 
 
-    <comp-pane>
-        <template>
-            <div>
-                <div>hello wutz {{ scope.blah }}
-                <a onclick="$('comp-pane')[0].reload()">alsdfkj</a></div>
-            </div>
-        </template>
 
+<comp-pane ajax-src="aasldfk" id="a">
+        <template>
+            <div>hello wutz {{ scope.blah }}
+                <a onclick="$('#a')[0].reload()">alsdfkj</a></div>
+        </template>
     </comp-pane>
+
+
+    <comp-pane ajax-src="aasldfk" id="first">
+        <template>
+            <div>hello wutz {{ scope.blah }}
+                <a onclick="$('#first')[0].reload()">alsdfddewrekj</a></div>
+        </template>
+    </comp-pane>
+    <!-- must load after comp-pane -->
 
 
 </body>
