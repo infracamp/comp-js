@@ -101,6 +101,8 @@ class Renderer {
             }
         }
 
+
+
         if(tplNode.hasAttribute("for$")) {
             // Append foreach elements
             let forCode = tplNode.getAttribute("for$");

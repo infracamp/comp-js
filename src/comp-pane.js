@@ -6,13 +6,14 @@ class CompPane extends HTMLElement {
         super();
         this.ajaxSrc = null;
         this.templateNode = null;
-
+        this.targetNode = null;
     }
 
 
     reload() {
         var renderer = new Renderer();
-        renderer.renderInto(this, {}, this.templateNode);
+        this.targetNode.innerHTML = "";
+        renderer.renderInto(this.targetNode, {}, this.templateNode);
     }
 
 
@@ -36,10 +37,14 @@ class CompPane extends HTMLElement {
             console.log("ready");
             var renderer = new Renderer();
             self.templateNode = self.firstElementChild;
+
+            self.targetNode = document.createElement("div");
+            self.appendChild(self.targetNode);
+
             console.log("connect", self.templateNode);
             //this.templateNode = this.content.childNodes[0].cloneNode(true);
 
-            renderer.renderInto(self, {blah: "muh"}, self.templateNode);
+            renderer.renderInto(self.targetNode, {blah: "muh"}, self.templateNode);
 
         }, 1);
 
