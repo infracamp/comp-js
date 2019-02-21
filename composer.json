@@ -9,14 +9,15 @@
   "repositories": [
   ],
   "require": {
-    "php": ">=7.2"
+    "php": ">=7.2",
+    "phore/status-page": "dev-master",
+    "erusev/parsedown-extra": "dev-master"
   },
   "autoload": {
     "psr-4": {
       "InfraCamp\\CompJs\\": "src/"
     },
     "files": [
-      "config.php"
     ]
   },
   "minimum-stability": "dev",

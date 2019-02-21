@@ -1,0 +1,4 @@
+
+class CJHtmlElement extends HTMLElement {
+
+}

@@ -1,5 +1,5 @@
 
-class CompPane extends HTMLElement {
+class CJPaneElement extends CJHtmlElement {
 
 
 
@@ -41,6 +41,7 @@ class CompPane extends HTMLElement {
     }
 
 
+
     connectedCallback() {
         var self = this;
         /* setTimeout(): make it work on chrome and opera to support dynamic instanciation - otherwise childElements will be empty*/
@@ -60,4 +61,4 @@ class CompPane extends HTMLElement {
 
 
 
-customElements.define("comp-pane", CompPane);
+customElements.define("cj-pane", CJPaneElement);

@@ -1,20 +1,21 @@
 
-class CompForm extends HTMLElement {
+class CJAjaxFormElement extends CJFormElement {
     constructor() {
         super();
         this.ajaxAction = null;
         this.preload = false;
         this.onsuccess = null;
-        this._submitButton = null;
-        this._formElements = null;
-        self = this;
     }
 
 
 
-    static get observedAttributes() { return ["ajax-action", "preload", "onsuccess"]; }
+    static get observedAttributes() {
+        var attr = CJFormElement.observedAttributes;
+        return attr;
+    }
 
     attributeChangedCallback(name, oldValue, newValue) {
+        super.attributeChangedCallback(name, oldValue, newValue);
         switch (name) {
             case "ajax-action":
                 this.ajaxAction = newValue;
@@ -26,39 +27,9 @@ class CompForm extends HTMLElement {
                 this.onsuccess = newValue;
                 break;
         }
-
-
-        console.log("attribute change");
     }
 
 
-    _gather_form_data (form, dataObj) {
-        console.log(form);
-        switch (form.tagName) {
-            case "INPUT":
-                switch (form.type) {
-                    case "checkbox":
-                    case "radio":
-                        console.log("checkbox");
-                        if (form.checked == true)
-                            dataObj[form.name] = form.value;
-                        return;
-                }
-            case "SELECT":
-            case "TEXTAREA":
-                dataObj[form.name] = $(form).val();
-                break;
-        }
-    }
-
-
-    _fill_form_single(elem, dataObj) {
-        $(elem).val(dataObj[elem.name]);
-    }
-
-    _fill_data (dataObj) {
-        this._formElements.each((i, e) => this._fill_form_single(e, dataObj));
-    }
 
     _on_submit_click(e) {
         e.preventDefault();
@@ -110,8 +81,7 @@ class CompForm extends HTMLElement {
                 });
         }
     }
-
 }
 
 
-customElements.define("comp-form", CompForm);
+customElements.define("cj-ajax-form", CJAjaxFormElement);

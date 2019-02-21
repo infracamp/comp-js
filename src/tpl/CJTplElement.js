@@ -1,6 +1,6 @@
 
 
-class CompTpl extends HTMLElement {
+class CJTplElement extends HTMLElement {
 
     constructor() {
         super();
@@ -11,7 +11,7 @@ class CompTpl extends HTMLElement {
 
 
     reload() {
-        var renderer = new Renderer();
+        var renderer = new CJRenderer();
         this.targetNode.innerHTML = "";
         renderer.renderInto(this.targetNode, {}, this.templateNode);
     }
@@ -35,7 +35,7 @@ class CompTpl extends HTMLElement {
         /* setTimeout(): make it work on chrome and opera to support dynamic instanciation - otherwise childElements will be empty*/
         setTimeout( function () {
             console.log("ready");
-            var renderer = new Renderer();
+            var renderer = new CJRenderer();
             self.templateNode = self.firstElementChild;
 
             self.targetNode = document.createElement("div");
@@ -48,13 +48,9 @@ class CompTpl extends HTMLElement {
 
         }, 1);
 
-
-
     }
-
 
 }
 
 
-
-customElements.define("comp-tpl", CompTpl);
+customElements.define("cj-tpl", CJTplElement);

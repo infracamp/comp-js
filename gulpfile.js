@@ -4,7 +4,7 @@ const gulp = require("gulp");
 const { watch } = require("gulp-watch");
 const concat = require('gulp-concat');
 const minify = require("gulp-minify");
-
+const order = require("gulp-order");
 /*
 function html() {
     return src('client/templates/*.pug')
@@ -15,14 +15,17 @@ function html() {
 
  */
 function css() {
-    return src('src/*.css')
+    return src('src/**/*.css')
         .pipe(concat('compjs.css'))
         .pipe(dest('www/dist'))
         .pipe(dest('dist'))
 }
 
 function js() {
-    return src('src/*.js', { sourcemaps: true })
+    return src('src/**/*.js', { sourcemaps: true })
+        .pipe(order([
+            "src/core/**/*.js"
+        ]))
         .pipe(concat('compjs.js'))
         .pipe(dest('www/dist', { sourcemaps: true }))
         .pipe(dest('dist', { sourcemaps: true }));
@@ -34,5 +37,5 @@ exports.css = css;
 exports.default = parallel(js, css);
 
 task("watch", function () {
-    gulp.watch("src/*.js", exports.default)
+    gulp.watch("src/**/*.*", exports.default)
 })

@@ -1,9 +1,9 @@
 
 
-class Renderer {
+class CJRenderer {
 
     constructor() {
-        Renderer.renderer = this;
+        CJRenderer.renderer = this;
     }
 
     boolEval(scope, code) {
@@ -55,6 +55,7 @@ class Renderer {
             });
         }
     }
+
 
 
     /**
