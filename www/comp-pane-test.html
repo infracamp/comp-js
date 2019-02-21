@@ -14,22 +14,15 @@
 
 
 
-<comp-pane ajax-src="aasldfk" id="a">
-        <template>
-            <div>hello wutz {{ scope.blah }}
-                <a onclick="$('#a')[0].reload()">alsdfkj</a></div>
-        </template>
-    </comp-pane>
+<comp-pane src="_pane-inc.html" id="a">
 
+</comp-pane>
 
-    <comp-pane ajax-src="aasldfk" id="first">
-        <template>
-            <div>hello wutz {{ scope.blah }}
-                <a onclick="$('#first')[0].reload()">alsdfddewrekj</a></div>
-        </template>
-    </comp-pane>
-    <!-- must load after comp-pane -->
+<comp-pane src="_pane-inc.html" id="sh1" shdadow-dom>
 
+</comp-pane>
+
+<button onclick="$('#sh1')[0]._loadUrl('comp-form-test.html')">Change to form</button>
 
 </body>
 </html>

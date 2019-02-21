@@ -5,7 +5,12 @@
     </head>
 
     <body>
-
+        <comp-form ajax-action="comp-form.json" preload onsuccess="console.log(data)">
+            <label>Abc</label><input type="text" name="text1">
+            <input type="checkbox" name="check1" value="1">
+            <textarea name="textarea1"></textarea>
+            <button type="submit" name="send">Send</button>
+        </comp-form>
         <comp-form ajax-action="comp-form.json" preload onsuccess="console.log(data)">
             <label>Abc</label><input type="text" name="text1">
             <input type="checkbox" name="check1" value="1">

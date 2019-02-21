@@ -6,17 +6,29 @@
     <meta charset="utf-8"/>
 </head>
 <body>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="/dist/compjs.js" language="JavaScript"></script>
-    <script is="comp-fhtml" lang="javascript">
-        fhtml({
-            "table": [
-                {"th": ["td", "td"]},
-                (data, tpl) => data.forEach(cur => tpl.push({td: dur.name}))
 
-            ]
-        })
-    </script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="/dist/compjs.js" language="JavaScript"></script>
+
+
+
+    <comp-tpl ajax-src="aasldfk" id="a">
+        <template>
+            <div>hello wutz {{ scope.blah }}
+                <a onclick="$('#a')[0].reload()">alsdfkj</a></div>
+        </template>
+    </comp-tpl>
+
+
+    <comp-tpl ajax-src="aasldfk" id="first">
+        <template>
+            <div>hello wutz {{ scope.blah }}
+                <a onclick="$('#first')[0].reload()">alsdfddewrekj</a></div>
+        </template>
+    </comp-tpl>
+    <!-- must load after comp-pane -->
 
 
 </body>
