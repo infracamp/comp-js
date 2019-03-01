@@ -9,4 +9,6 @@ command:
   dev:
     - "sudo npm install gulp-cli -g"
     - "npm install -D --no-bin-links"
+    - "composer install"
+    - "gulp build"
     - "D:gulp watch"

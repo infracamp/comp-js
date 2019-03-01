@@ -12,7 +12,6 @@ class CJ_Req {
         }
     }
 
-
     /**
      *
      * @param body
