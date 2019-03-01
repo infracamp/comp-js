@@ -15,16 +15,16 @@ An easy way to read and write form data.
 
 ### Read form values
 
-<cj-highlight>
+```html
 <div id="formData1"></div>
 <cj-form onsubmit="ce.any('formData1').innerText = JSON.stringify(this.data)" debug>
     <form oninput="output.value=JSON.stringify(this.data)">
-        <input type="text" name="name1">
-        <input type="text" name="name2">
-        <input type="checkbox" name="check1" value="yess">
-        <input type="radio" name="radio1" value="a">
-        <input type="radio" name="radio1" value="b">
-        <select name="select1">
+        <input type="text" name="name1"\>
+        <input type="text" name="name2"\>
+        <input type="checkbox" name="check1" value="yess"\>
+        <input type="radio" name="radio1" value="a"\>
+        <input type="radio" name="radio1" value="b"\>
+        <select name="select1"\>
             <option value="a">A</option>
             <option value="b">B</option>
         </select>
@@ -38,15 +38,16 @@ An easy way to read and write form data.
         </output>
     </form>
 </cj-form>
-</cj-highlight>
-
+```
+<cj-exec debug></cj-exec>
 ### Set form values
 
-<cj-highlight>
+
+```html
 <cj-form id="set_form_1" debug>
     <form>
-        <input type="text" name="name1">
-        <input type="text" name="name2">
+        <input type="text" name="name1"\>
+        <input type="text" name="name2"\>
         <input type="checkbox" name="check1" value="yess">
         <input type="radio" name="radio1" value="a">
         <input type="radio" name="radio1" value="b">
@@ -63,5 +64,7 @@ An easy way to read and write form data.
         </output>
     </form>
 </cj-form>
+
 <button onclick="ce.form('set_form_1').data = {name1: 'some value', check1: 'yess', radio1: 'a', select1: 'b'}">Set Data</button>
-</cj-highlight>
+```
+<cj-exec debug></cj-exec>

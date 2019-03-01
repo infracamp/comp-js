@@ -24,6 +24,15 @@ class ce {
     }
 
     /**
+     * @static
+     * @param id
+     * @return {CjHighlightElement}
+     */
+    static highlight(id) {
+        return ce._getElementById(id, CjHighlightElement);
+    }
+
+    /**
      *
      * @static
      * @param id

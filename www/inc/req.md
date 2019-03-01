@@ -14,17 +14,18 @@ c.req("http://google.de").plain = [function];
 
 ### Using inline HTML
 
-<cj-highlight>
-<div id="id1">Hello</div>
-<button onclick="c.req('/data/form.json').plain = (data) => { ce.any('id1').innerText = data; }">Load Ajax</button>
-</cj-highlight>
-
+```html
+<cj-highlight id="id1" lang="json"></cj-highlight>
+<button onclick="c.req('/data/form.json').plain = (data) => { ce.highlight('id1').setCode(data, 'json'); }">Load Ajax</button>
+```
+<cj-exec class="card"></cj-exec>
 
 ### Parsing JSON
 
-<cj-highlight>
-<div id="json1"></div>
+```html
+<cj-highlight id="json1" lang="json"></div>
 <cj-script>
-c.req('/data/form.json').json = (jsonData) => ce.any('json1').innerText = jsonData["text1"]; 
+c.req('/data/form.json').json = (jsonData) => ce.highlight('json1').setCode(jsonData["text1"]); 
 </cj-script>
-</cj-highlight>
+```
+<cj-exec></cj-exec>
