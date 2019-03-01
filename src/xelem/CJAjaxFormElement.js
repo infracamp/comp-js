@@ -8,11 +8,8 @@ class CJAjaxFormElement extends CJFormElement {
     }
 
 
+    static get observedAttributes() { return ["ajax-action", "preload", "onsuccess", ...CJFormElement.observedAttributes]; }
 
-    static get observedAttributes() {
-        var attr = CJFormElement.observedAttributes;
-        return attr;
-    }
 
     attributeChangedCallback(name, oldValue, newValue) {
         super.attributeChangedCallback(name, oldValue, newValue);

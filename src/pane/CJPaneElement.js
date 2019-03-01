@@ -10,11 +10,10 @@ class CJPaneElement extends CJHtmlElement {
         this._shadowDom = false;
     }
 
-
-    static get observedAttributes() { return ["src", "shadow-dom"]; }
+    static get observedAttributes() { return ["src", "shadow-dom", ...CJHtmlElement.observedAttributes]; }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log(this);
+        super.attributeChangedCallback(name, oldValue, newValue);
         switch (name) {
             case "src":
                 this._src = newValue;
