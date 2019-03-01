@@ -18,42 +18,16 @@ class CJFormElement extends CJHtmlElement {
     }
 
 
-    static get observedAttributes() { return ["onsubmit"]; }
+    static get observedAttributes() { return ["onsubmit", ...CJHtmlElement.observedAttributes]; }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log ("attr", newValue);
+        super.attributeChangedCallback(name, oldValue, newValue);
         switch (name) {
             case "onsubmit":
                 this.cf_onsubmit = newValue;
                 break;
-            default:
-                throw "undefined attribute for comp-form: name";
+
         }
-    }
-
-
-    /**
-     * Read the currently values from the form and return
-     * object based on the forms names
-     *
-     * @return object
-     */
-    getData() {
-        var ret = {};
-        var elements = $("input, textarea, checkbox", this);
-        elements.each((i, e) => this._gather_form_data(e, ret));
-
-        return ret;
-    }
-
-    /**
-     * Set the form data from external and rerender the input values
-     *
-     * @public
-     * @param data
-     */
-    setData(data) {
-        this._fill_data(data);
     }
 
 
@@ -65,50 +39,90 @@ class CJFormElement extends CJHtmlElement {
      * @private
      */
     _gather_form_data (form, dataObj) {
-        console.log(form);
         switch (form.tagName) {
             case "INPUT":
                 switch (form.type) {
                     case "checkbox":
                     case "radio":
-                        console.log("checkbox");
                         if (form.checked == true)
                             dataObj[form.name] = form.value;
                         return;
                 }
             case "SELECT":
+                dataObj[form.name] = $(form).val();
+                break;
             case "TEXTAREA":
                 dataObj[form.name] = $(form).val();
                 break;
         }
     }
 
+    /**
+     * Read the currently values from the form and return
+     * object based on the forms names
+     *
+     * @return object
+     */
+    getData() {
+        var ret = {};
+        var elements = $("input, textarea, checkbox, select", this);
+        elements.each((i, e) => this._gather_form_data(e, ret));
+        this._log("getData():", ret);
+        return ret;
+    }
+
+
+
 
     /**
      *
-     * @param elem
+     * @param form
      * @param dataObj
      * @private
      */
-    _fill_form_single(elem, dataObj) {
-        $(elem).val(dataObj[elem.name]);
+    _fill_form_single(form, dataObj) {
+        var formName = form.name;
+        if (formName === undefined)
+            formName = form.id;
+
+        switch (form.tagName) {
+            case "INPUT":
+                switch (form.type) {
+                    case "checkbox":
+                    case "radio":
+                        if (dataObj[formName] == form.value) {
+                            form.checked = true;
+                        } else {
+                            form.checked = false;
+                        }
+                        return;
+                }
+                form.value = dataObj[formName];
+                break;
+            case "SELECT":
+                form.value = dataObj[formName];
+                break;
+            case "TEXTAREA":
+                form.value = dataObj[formName];
+                break;
+        }
     }
 
     /**
+     * Set the form data from external and rerender the input values
      *
-     * @param dataObj
-     * @private
+     * @public
+     * @param data
      */
-    _fill_data (dataObj) {
-        var elements = $("input, textarea, checkbox", this);
-        elements.each((i, e) => this._fill_form_single(e, dataObj));
+    setData(data) {
+        this._log("setData()", data);
+        var elements = $("input, textarea, checkbox, select", this);
+        elements.each((i, e) => this._fill_form_single(e, data));
     }
-
 
     _submit(e) {
-        console.log("_submit", this.cf_onsubmit);
+        this._log("_submit(", e, "); calling: onsubmit=", this.cf_onsubmit);
         CompCore.instance.evalAttr(this.cf_onsubmit, e, this);
-
     }
 
 
