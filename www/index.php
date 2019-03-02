@@ -40,8 +40,6 @@ $app->addPage("/pane", function () {
 
 
 
-$app->addPage("/subapp", function() {}, new NaviButtonWithIcon("Sub Application", "fas fa-time"));
-
 $hl->end_recording();
 $app->serve();
 

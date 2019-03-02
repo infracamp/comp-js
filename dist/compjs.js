@@ -1,3 +1,8 @@
+/**
+ * ComponentJS
+ *
+ * @author Matthias Leuffen <m@tth.es>
+ */
 
 
 class c {
