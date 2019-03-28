@@ -43,8 +43,6 @@ $app->addPage("/timer", function () {
     return FHtml::MarkdownFile(__DIR__ . "/inc/timer.md");
 }, new NaviButtonWithIcon("Timer", "fas fa-table"));
 
-$app->addPage("/subapp", function() {}, new NaviButtonWithIcon("Sub Application", "fas fa-time"));
-
 $hl->end_recording();
 $app->serve();
 
