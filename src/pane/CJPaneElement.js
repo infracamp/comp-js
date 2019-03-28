@@ -32,7 +32,15 @@ class CJPaneElement extends CJHtmlElement {
         setTimeout(function() {
             jQuery.ajax(url, CompCore.instance.ajaxOptionsHtml)
                 .done(function(data) {
-                    self.targetNode.innerHTML = data
+                    self.targetNode.innerHTML = data;
+                    var template = $("template", self.targetNode)[0];
+                    var script = $("script", self.targetNode)[0].textContent;
+                    console.log("node", template);
+                    self.targetNode.appendChild(template.content);
+                    var e = function(script) {
+                        eval(script);
+                    };
+                    e.call(self.targetNode, script);
                 });
         }, 1);
 
@@ -48,7 +56,9 @@ class CJPaneElement extends CJHtmlElement {
             if ( ! self._shadowDom) {
                 self.targetNode = document.createElement("div");
                 self.appendChild(self.targetNode);
+
             } else {
+                console.log("with shadow");
                 self.targetNode = self.attachShadow({mode: 'open'});
             }
 

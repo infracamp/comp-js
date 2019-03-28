@@ -38,7 +38,10 @@ $app->addPage("/pane", function () {
     return FHtml::MarkdownFile(__DIR__ . "/inc/pane.md");
 }, new NaviButtonWithIcon("Pane", "fas fa-table"));
 
-
+// Define the Cards site
+$app->addPage("/timer", function () {
+    return FHtml::MarkdownFile(__DIR__ . "/inc/timer.md");
+}, new NaviButtonWithIcon("Timer", "fas fa-table"));
 
 $app->addPage("/subapp", function() {}, new NaviButtonWithIcon("Sub Application", "fas fa-time"));
 
