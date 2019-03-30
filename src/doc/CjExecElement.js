@@ -27,6 +27,14 @@ class CjExecElement extends CJHtmlElement {
 
                     self.innerHTML = codeNode.textContent;
 
+
+                    setTimeout(function() {
+                        $("script", self).each(function(idx, node) {
+                            eval(node.textContent);
+                        })
+                    },1);
+
+
                 }, 1);
     }
 

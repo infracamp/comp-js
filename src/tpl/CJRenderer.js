@@ -23,7 +23,7 @@ class CJRenderer {
         console.log(reg);
         let genCode = `
                 for(let index = 0; index < ${reg[1]}.length; index++){
-                    ${reg[2]} = ${reg[1]}[index];
+                    var ${reg[2]} = ${reg[1]}[index];
                     let curClone = tplNode.cloneNode(false);
                     //curClone.textContent = tplNode.textContent;
                     targetNode.appendChild(curClone);
@@ -67,6 +67,10 @@ class CJRenderer {
         if(typeof tplNode === "undefined") {
             tplNode = this.templateDom;
         }
+
+        ((e, a) => {
+            console.log(targetNode);
+        })(e,a);
 
         /*
         for(let i = 0; i < targetNode.children.length; i++) {
