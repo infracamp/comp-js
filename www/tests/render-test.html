@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="http://localhost/dist/compjs.js"></script>
+
+    <script>
+        QUnit.test("renderer.basic", function(assert) {
+
+            var scope = {
+                "a1": "a1-val",
+                "a2": "a2-val",
+                "a3": [
+                    {"e1": "e1-val"}
+                ]
+
+
+            };
+
+            var out = document.querySelector("#out");
+
+            cj_render(document.querySelector("#template"), out, scope);
+
+            console.log (out.innerHTML);
+
+            assert.ok(true);
+        })
+
+
+    </script>
+</head>
+<body>
+
+
+<div id="qunit"></div>
+<div id="qunit-fixture">
+    <div id="template">
+        <div for$="val in scope">
+            {{val}}
+        </div>
+
+    </div>
+    <div id="out">
+
+    </div>
+</div>
+</body>
+</html>

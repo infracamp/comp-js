@@ -14,7 +14,8 @@
     <div for$="data in scope">
         Hello {{ data }}
         <div if$="data == 'opt'">
-            <div for$="cur in scope.opt">
+            <div for$="cur in scope.opt" class$="{someClass: cur == 'a'}">
+                <p ></p>
                 Scope: {{ cur }}: {{ scope.opt[cur] }}
             </div>
         
