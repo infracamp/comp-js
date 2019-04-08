@@ -21,7 +21,11 @@
         
         </div>
     </div>
-</div>
+    <div each$="scope.opt as ekey => evalue">
+       hello {{ ekey }} : {{evalue}}
+    </div>
+   
+</div> 
 Target:
 <div id="target"></div>
 
@@ -35,10 +39,10 @@ setTimeout(function() {
     console.log(tpl);
     
     cj_render(tpl, target, {"arr": ["a", "b", "c"], "arr2": "b", "opt": {"a": "a1", "b": "b1"}});
-    setTimeout((e) => {
-        console.log($("#target").html());
-        $("#debug").text(target.innerHTML);
-    }, 100)
+    
+    console.log($("#target").html());
+    $("#debug").text(target.innerHTML);
+   
     
 }, 100);
 

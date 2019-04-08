@@ -1,0 +1,3 @@
+
+## SYS ADMIN must be set for headless chrome to run (puppeteer)
+KICKSTART_DOCKER_RUN_OPTS="--cap-add=SYS_ADMIN"

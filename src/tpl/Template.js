@@ -10,6 +10,22 @@ function cj_render(source, target, scope) {
 
         "for$": (_r_source, _r_target, _r_expr) => {
             var ____eval = 'for (' + _r_expr + ") { ____renderFn(_r_source, _r_target, true); };";
+            try {
+                eval(____eval);
+            } catch (_e) {
+                throw `Error in statement for$='${_r_expr}': ` + _e;
+            }
+            return false;
+        },
+        "each$": (_r_source, _r_target, _r_expr) => {
+            var ____matches = _r_expr.match(/^(.*?) as (.*?)(\=\>(.*?))$/);
+            console.log(____matches);
+            if (____matches.length == 5) {
+                var ____eval = `for (${____matches[2]} in ${____matches[1]}) { ${____matches[4]} = ${____matches[1]}[${____matches[2]}]; ____renderFn(_r_source, _r_target, true); };`;
+            } else {
+                throw `Invalid each$='${_r_expr}' syntax.`;
+            }
+            console.log(____eval);
             eval(____eval);
             return false;
         },
@@ -20,7 +36,11 @@ function cj_render(source, target, scope) {
         },
         "__eval__": (_r_input) => {
             _r_input = _r_input.replace(/\{\{(.*?)\}\}/g, (match, contents) => {
-                return eval(contents);
+                try {
+                    return eval(contents);
+                } catch (_e) {
+                    throw `Èrror in inline statement ${match} in text block '${_r_input}': ` + _e;
+                }
             });
             return _r_input;
         }

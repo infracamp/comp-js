@@ -36,7 +36,10 @@
 <div id="qunit"></div>
 <div id="qunit-fixture">
     <div id="template">
-        <div for$="val in scope">
+        <div for$="key in scope">
+            {{key}}
+        </div>
+        <div each$="scope as key => val">
             {{val}}
         </div>
 
