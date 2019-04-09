@@ -43,7 +43,7 @@ setTimeout(function() {
     console.log($("#target").html());
     $("#debug").text(target.innerHTML);
    
-    
+    console.log(cur, evalue);
 }, 100);
 
 
