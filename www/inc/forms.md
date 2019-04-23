@@ -63,6 +63,7 @@ An easy way to read and write form data.
             <option value="Some Value1">
             <option value="Some Val 2">            
         </datalist>
+        <input name="slider1" type="range" min="100" max="500" step="10" />
         <output name="output">
         </output>
     </form>

@@ -14,11 +14,7 @@
     "erusev/parsedown-extra": "dev-master"
   },
   "autoload": {
-    "psr-4": {
-      "InfraCamp\\CompJs\\": "src/"
-    },
-    "files": [
-    ]
+
   },
   "minimum-stability": "dev",
   "require-dev": {
