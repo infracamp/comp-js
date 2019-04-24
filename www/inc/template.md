@@ -11,7 +11,7 @@
         <div id="l2b" if$="scope[0] == 'a'">aja</div>
     </div>
     
-    <div for$="data in scope">
+    <div for$="var data in scope">
         Hello {{ data }}
         <div if$="data == 'opt'">
             <div for$="cur in scope.opt" class$="{someClass: cur == 'a'}">
@@ -48,6 +48,5 @@ setTimeout(function() {
 
 
 </script>
-
 ```
 <cj-exec></cj-exec>

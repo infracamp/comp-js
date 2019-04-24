@@ -46,7 +46,14 @@ $app->addPage("/timer", function () {
 $app->addPage("/template", function () {
     return FHtml::MarkdownFile(__DIR__ . "/inc/template.md");
 }, new NaviButtonWithIcon("Template", "fas fa-table"));
+
+// Define the Cards site
+$app->addPage("/template_demo", function () {
+    return FHtml::MarkdownFile(__DIR__ . "/inc/template_demo.md");
+}, new NaviButtonWithIcon("Template Demo", "fas fa-table"));
 $hl->end_recording();
+
+
 $app->serve();
 
 

@@ -5,11 +5,12 @@
  * @param scope
  */
 function cj_render(source, target, scope) {
-
+    "use strict";
     var func = {
 
-        "for$": (_r_source, _r_target, _r_expr) => {
-            var ____eval = 'for (' + _r_expr + ") { ____renderFn(_r_source, _r_target, true); };";
+        "for$": (scope, _r_source, _r_target, _r_expr) => {
+            console.log("for", scope, this);
+            var ____eval = 'for (' + _r_expr + ") { ____renderFn(scope, _r_source, _r_target, true); };";
             try {
                 eval(____eval);
             } catch (_e) {
@@ -17,11 +18,11 @@ function cj_render(source, target, scope) {
             }
             return false;
         },
-        "each$": (_r_source, _r_target, _r_expr) => {
+        "each$": (scope, _r_source, _r_target, _r_expr) => {
             var ____matches = _r_expr.match(/^(.*?) as (.*?)(\=\>(.*?))$/);
             console.log(____matches);
             if (____matches.length == 5) {
-                var ____eval = `for (${____matches[2]} in ${____matches[1]}) { ${____matches[4]} = ${____matches[1]}[${____matches[2]}]; ____renderFn(_r_source, _r_target, true); };`;
+                var ____eval = `for (${____matches[2]} in ${____matches[1]}) { ${____matches[4]} = ${____matches[1]}[${____matches[2]}]; ____renderFn(scope, _r_source, _r_target, true); };`;
             } else {
                 throw `Invalid each$='${_r_expr}' syntax.`;
             }
@@ -29,12 +30,15 @@ function cj_render(source, target, scope) {
             eval(____eval);
             return false;
         },
-        "if$": (_r_source, _r_target, _r_expr) => {
-            var _____eval = 'if (' + _r_expr + ") { ____renderFn(_r_source, _r_target, true); };";
+        "if$": (scope, _r_source, _r_target, _r_expr) => {
+            console.log("if", scope, this);
+            var _____eval = 'if (' + _r_expr + ") { ____renderFn(scope, _r_source, _r_target, true); };";
             eval(_____eval);
             return false;
         },
-        "__eval__": (_r_input) => {
+        "__eval__": (scope, _r_input) => {
+            var wurst = "bah";
+            console.log("eval:", scope, this);
             _r_input = _r_input.replace(/\{\{(.*?)\}\}/g, (match, contents) => {
                 try {
                     return eval(contents);
@@ -52,9 +56,9 @@ function cj_render(source, target, scope) {
      * @type {{class$: (function(*, *, *=, *): boolean)}}
      */
     var modifiers = {
-        "class$": (_r_source, _r_target, _r_expr, _r_resultNode) => {
+        "class$": (scope, _r_source, _r_target, _r_expr, _r_resultNode) => {
             eval("var _r_expr = " + _r_expr);
-            for (__curClassName in _r_expr) {
+            for (let __curClassName in _r_expr) {
                 if (_r_expr[__curClassName]) {
                     _r_resultNode.classList.add(__curClassName);
                 }
@@ -63,27 +67,28 @@ function cj_render(source, target, scope) {
         }
     };
 
-    var ____renderFn = (source, target, noParseAttrs) => {
+    var ____renderFn = (scope, source, target, noParseAttrs) => {
+        console.log ("render.scope", scope, this);
         console.log ("node type", source.nodeType);
         if (source.nodeType === 1) {
             console.log("walk", source, target)
 
             var newTarget = source.cloneNode(false);
             if ( ! noParseAttrs) {
-                for (curFunc in func) {
+                for (let curFunc in func) {
                     if (source.hasAttribute(curFunc)) {
                         console.log(curFunc, source, target);
-                        var ret = func[curFunc](source, target, source.getAttribute(curFunc), newTarget);
+                        let ret = func[curFunc].call(this, this, source, target, source.getAttribute(curFunc), newTarget);
                         if (ret === false)
                             return;
                     }
                 }
             }
 
-            for (curFunc in modifiers) {
+            for (let curFunc in modifiers) {
                 if (source.hasAttribute(curFunc)) {
                     console.log(curFunc, source, target);
-                    var ret = modifiers[curFunc](source, target, source.getAttribute(curFunc), newTarget);
+                    let ret = modifiers[curFunc].call(scope, scope, source, target, source.getAttribute(curFunc), newTarget);
                     if (ret === false)
                         return;
                 }
@@ -96,11 +101,11 @@ function cj_render(source, target, scope) {
 
 
                 // Render content nodes into previous target.
-                ____renderFn(curSource1, newTarget);
+                ____renderFn.call({}, scope, curSource1, newTarget);
             }
         } else if (source.nodeType === 3) {
             var _new_elem = source.cloneNode(false);
-            _new_elem.textContent = func.__eval__(_new_elem.textContent);
+            _new_elem.textContent = func.__eval__.call(scope, scope, _new_elem.textContent);
             target.appendChild(_new_elem);
         } else {
             //if ()
@@ -115,6 +120,6 @@ function cj_render(source, target, scope) {
     for (var i = 0; i < source.childNodes.length; i++) {
         var curSource = source.childNodes[i];
         // Render content nodes into previous target.
-        ____renderFn(curSource, target);
+        ____renderFn.call({}, scope, curSource, target);
     }
 }
