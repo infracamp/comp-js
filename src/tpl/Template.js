@@ -6,6 +6,11 @@
  */
 function cj_render(source, target, scope) {
     "use strict";
+
+    function rewriteExpre(expr) {
+
+    }
+
     var func = {
 
         "for$": (scope, _r_source, _r_target, _r_expr) => {

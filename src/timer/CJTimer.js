@@ -17,8 +17,8 @@ class CJTimerElement extends CJHtmlElement {
         switch (name) {
             case "interval":
                 this._interval = newValue;
-
                 break;
+
             case "timeout":
                 this._timeout = newValue;
                 break;

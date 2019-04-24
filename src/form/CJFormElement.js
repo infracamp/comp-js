@@ -18,7 +18,7 @@ class CJFormElement extends CJHtmlElement {
     }
 
 
-    static get observedAttributes() { return ["onsubmit", ...CJHtmlElement.observedAttributes]; }
+    static get observedAttributes() { return ["onsubmit", "onchange", "debounce", ...CJHtmlElement.observedAttributes]; }
 
     attributeChangedCallback(name, oldValue, newValue) {
         super.attributeChangedCallback(name, oldValue, newValue);
@@ -26,6 +26,8 @@ class CJFormElement extends CJHtmlElement {
             case "onsubmit":
                 this.cf_onsubmit = newValue;
                 break;
+
+
 
         }
     }
