@@ -7,15 +7,28 @@
 function cj_render(source, target, scope) {
     "use strict";
 
-    function rewriteExpre(expr) {
 
+    var __reservedWords = [
+        "new", "let", "var", "const", "scope", "true", "false", "in", "of"
+    ];
+
+    function rewriteExpre(expr) {
+        return expr.replace(/(^|\s|\[|\()(\w+)/g, (match, space, varName) => {
+                console.log("matches", space, varName);
+                if (__reservedWords.indexOf(varName) > -1)
+                    return match;
+                if (!isNaN(parseFloat(varName)) && isFinite(varName))
+                    return match;
+                return space + "scope." + varName;
+            });
     }
 
     var func = {
 
         "for$": (scope, _r_source, _r_target, _r_expr) => {
-            console.log("for", scope, this);
+
             var ____eval = 'for (' + _r_expr + ") { ____renderFn(scope, _r_source, _r_target, true); };";
+            console.log("for", scope, this, _r_expr, ____eval);
             try {
                 eval(____eval);
             } catch (_e) {
@@ -36,7 +49,7 @@ function cj_render(source, target, scope) {
             return false;
         },
         "if$": (scope, _r_source, _r_target, _r_expr) => {
-            console.log("if", scope, this);
+            console.log("if", scope, this, _r_expr);
             var _____eval = 'if (' + _r_expr + ") { ____renderFn(scope, _r_source, _r_target, true); };";
             eval(_____eval);
             return false;
@@ -46,6 +59,7 @@ function cj_render(source, target, scope) {
             console.log("eval:", scope, this);
             _r_input = _r_input.replace(/\{\{(.*?)\}\}/g, (match, contents) => {
                 try {
+                    contents = rewriteExpre(contents);
                     return eval(contents);
                 } catch (_e) {
                     throw `Èrror in inline statement ${match} in text block '${_r_input}': ` + _e;
@@ -83,7 +97,7 @@ function cj_render(source, target, scope) {
                 for (let curFunc in func) {
                     if (source.hasAttribute(curFunc)) {
                         console.log(curFunc, source, target);
-                        let ret = func[curFunc].call(this, this, source, target, source.getAttribute(curFunc), newTarget);
+                        let ret = func[curFunc].call(scope, scope, source, target, rewriteExpre(source.getAttribute(curFunc)), newTarget);
                         if (ret === false)
                             return;
                     }
@@ -93,7 +107,7 @@ function cj_render(source, target, scope) {
             for (let curFunc in modifiers) {
                 if (source.hasAttribute(curFunc)) {
                     console.log(curFunc, source, target);
-                    let ret = modifiers[curFunc].call(scope, scope, source, target, source.getAttribute(curFunc), newTarget);
+                    let ret = modifiers[curFunc].call(scope, scope, source, target, rewriteExpre(source.getAttribute(curFunc)), newTarget);
                     if (ret === false)
                         return;
                 }

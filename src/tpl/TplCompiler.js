@@ -29,6 +29,8 @@ class TplCompiler {
 
 
     compile(node) {
+        var wurst = "muh"
+
 
 
         node.getAttrib

@@ -11,17 +11,17 @@
         <div id="l2b" if$="scope[0] == 'a'">aja</div>
     </div>
     
-    <div for$="var data in scope">
-        Hello {{ data }}
+    <div for$="curName in scope">
+        Hello {{ scope[curName] }}
         <div if$="data == 'opt'">
-            <div for$="cur in scope.opt" class$="{someClass: cur == 'a'}">
+            <div for$="cur of opt" class$="{someClass: cur == 'a'}">
                 <p ></p>
                 Scope: {{ cur }}: {{ scope.opt[cur] }}
             </div>
         
         </div>
     </div>
-    <div each$="scope.opt as ekey => evalue">
+    <div each$="opt as ekey => evalue">
        hello {{ ekey }} : {{evalue}}
     </div>
    
