@@ -8,9 +8,21 @@ class CJ_Req {
             method: "GET",
             body: null,
             success: false,
-            dataType: "text"
+            dataType: "text",
+            data: null
         }
     }
+
+    /**
+     * Add
+     * @param params
+     * @return {CJ_Req}
+     */
+    withParams(params) {
+        this.request.data = params;
+        return this;
+    }
+
 
     /**
      *
